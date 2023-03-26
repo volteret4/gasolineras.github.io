@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Búsqueda en varias páginas</title>
+</head>
+<body>
+  <form id="search-form">
+    <input type="text" id="search-input" placeholder="Buscar en varias páginas">
+    <button type="submit">Go</button>
+  </form>
+  <br>
+  <a href="https://www.google.com/search?q=" id="google-search-link">Google</a>
+  <a href="https://www.bing.com/search?q=" id="bing-search-link">Bing</a>
+  <a href="https://www.duckduckgo.com/?q=" id="duckduckgo-search-link">DuckDuckGo</a>
+  <script>
+    // Cuando se envía el formulario, abre una nueva pestaña para cada enlace de búsqueda
+    document.getElementById('search-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Evita que el formulario se envíe a una URL
+
+      // Obtiene el término de búsqueda del campo de entrada
+      var searchTerm = document.getElementById('search-input').value;
+
+      // Crea una nueva pestaña para cada enlace de búsqueda y añade el término de búsqueda como parámetro de la URL
+      window.open('https://www.google.com/search?q=' + searchTerm, '_blank');
+      window.open('https://www.bing.com/search?q=' + searchTerm, '_blank');
+      window.open('https://www.duckduckgo.com/?q=' + searchTerm, '_blank');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Listas de regalos</title>
+    <meta charset="UTF-8">
+    <style>
+		.tachado {
+			text-decoration: line-through;
+		}
+	</style>
+</head>
+<body>
+    <button id="eliminarTachados">Eliminar tachados</button>
+    <button onclick="mostrarLista('maria.json')">María-Marrón</button>
+	<button onclick="mostrarLista('perico.json')">Amelia-Perico</button>
+	<div id="lista1"></div>
+    <div id="lista2"></div>
+	<script>
+		function mostrarLista(nombreArchivo) {
+			// Leer archivo JSON
+			fetch(nombreArchivo)
+				.then(response => response.json())
+				.then(data => {
+					// Procesar datos
+					let nombre = data.nombre;
+					let articulos = data.articulos;
+					// Crear lista
+					let lista = document.createElement('ul');
+					lista.innerHTML = `<h2>${nombre}</h2>`;
+					// Añadir elementos a la lista
+					articulos.forEach(articulo => {
+						let item = document.createElement('li');
+                        item.innerHTML = `<button>Tachar</button> ${articulo.regalo}`;
+                        item.setAttribute('data-tachado', 'no');
+						lista.appendChild(item);
+                        item.querySelector('button').addEventListener('click', () => {
+                        	if (item.getAttribute('data-tachado') === 'no') {
+	                        	item.setAttribute('data-tachado', 'si');
+	                        } else {
+		                        item.setAttribute('data-tachado', 'no');
+	                        }
+	                        item.classList.toggle('tachado');
+                        });
+                    });
+					// Mostrar lista en la página
+					if (nombreArchivo === 'maria.json') {
+						document.getElementById('lista1').appendChild(lista);
+					} else if (nombreArchivo === 'perico.json') {
+						document.getElementById('lista2').appendChild(lista);
+					}
+				});
+		}
+        function eliminarTachados(nombreArchivo) {
+            // Seleccionar elementos tachados
+            let elementosTachados = document.querySelectorAll("li[data-tachado='si']");
+            // Eliminar elementos tachados de la página web
+            elementosTachados.forEach(elemento => elemento.parentNode.removeChild(elemento));
+            // Leer archivo JSON
+            fetch(nombreArchivo)
+                .then(response => response.json())
+                .then(data => {
+                // Procesar datos
+                let nombre = data.nombre;
+                let articulos = data.articulos;
+                // Eliminar elementos tachados del archivo JSON
+                articulos = articulos.filter(articulo => articulo.tachado !== "si");
+                // Actualizar archivo JSON en el servidor
+                fetch(nombreArchivo, {
+                    method: "PATCH",
+                    body: JSON.stringify({ nombre: nombre, articulos: articulos }),
+                    headers: {
+                    "Content-Type": "application/json"
+                    }
+                });
+                });
+            }
+            document.getElementById("eliminarTachados").addEventListener("click", () => {
+                eliminarTachados(nombreArchivo);
+            });
+	</script>
+</body>
+</html>
