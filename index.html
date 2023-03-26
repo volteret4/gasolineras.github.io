@@ -70,7 +70,7 @@
 					Gasolina98.textContent = p['Precio Gasolina 98 E5'];
 					const boton = document.createElement('td'); // Creamos la celda para el botón
 					const botonEnlace = document.createElement('a'); // Creamos el enlace del botón
-					botonEnlace.href = `https://www.google.com/maps/search/${p.Direccion}`; // Asignamos la URL del enlace
+					botonEnlace.href = `https://www.google.com/maps/search/${p.Direccion}+${p.Municipio}`; // Asignamos la URL del enlace
 					botonEnlace.textContent = 'Ver en mapa'; // Texto del botón
 					botonEnlace.target = '_blank'; // Abrimos en una nueva pestaña
 					boton.appendChild(botonEnlace); // Añadimos el enlace al botón
