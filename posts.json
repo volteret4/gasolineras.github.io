@@ -6,7 +6,7 @@
             "fecha lanzamiento": "1-1-1980",
             "img": "./blog/img/test_1.jpg",
             "descripcion": "blablabla",
-            "fecha_publicacion": "15-02-2023",
+            "fecha_publicacion": "2023-02-12",
             "links": "https..."
         },
         "Nirvana - Bleached": {
@@ -15,7 +15,7 @@
             "fecha lanzamiento": "1-1-1980",
             "img": "./blog/img/test_2.jpg",
             "descripcion": "blablabla",
-            "fecha_publicacion": "11-02-2023",
+            "fecha_publicacion": "2023-03-15",
             "links": "https..."
         },
         "Nirvana - test3": {
@@ -24,7 +24,7 @@
             "fecha lanzamiento": "1-1-1980",
             "img": "./blog/img/test_3.jpg",
             "descripcion": "blablabla",
-            "fecha_publicacion": "15-04-2023",
+            "fecha_publicacion": "2023-04-15",
             "links": "https..."
         },
         "Rosendo - xxx": {
@@ -33,7 +33,7 @@
             "fecha lanzamiento": "1-1-1980",
             "img": "...",
             "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "fecha_publicacion": "15-03-2023",
+            "fecha_publicacion": "2023-05-15",
             "links": "..."
         }
     }
