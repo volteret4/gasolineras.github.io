@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>viciosmusicales</title>
+</head>
+<body>
+    <div id="latest-posts"></div>
+
+    <script>
+        // Función para cargar el contenido de un archivo HTML de post y extraer el título e imagen
+        function loadPostData(postNumber) {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const parser = new DOMParser();
+                    const htmlDoc = parser.parseFromString(xhr.responseText, 'text/html');
+                    const title = htmlDoc.querySelector('title').textContent;
+                    const image = htmlDoc.querySelector('img').src;
+                    const postContainer = document.createElement('div');
+                    postContainer.innerHTML = `
+                        <h2>${title}</h2>
+                        <img src="${image}" alt="${title}">
+                    `;
+                    document.getElementById('latest-posts').appendChild(postContainer);
+                }
+            };
+            xhr.open('GET', `posts/${postNumber}.html`, true);
+            xhr.send();
+        }
+
+        // Cargar los últimos posts
+        const numberOfPostsToShow = 3;
+        for (let i = 1; i <= numberOfPostsToShow; i++) {
+            loadPostData(`14-05-${i}`);
+        }
+    </script>
+</body>
+</html>
