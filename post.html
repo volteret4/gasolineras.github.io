@@ -4,17 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post</title>
+    <style>
+        /* Estilos para el header y la barra lateral */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #181a1c;
+            padding: 10px;
+        }
+        header h1 {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+        }
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100%;
+            background-color: #181a1c;
+            padding-top: 60px;
+            overflow-y: auto;
+        }
+        aside ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        aside li a {
+            display: block;
+            padding: 5px 10px;
+            color: white;
+            text-decoration: none;
+        }
+        aside li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        #post-content {
+            margin-left: 200px;
+            padding-top: 60px;
+        }
+        /* Estilos para el fondo, color de letra y fuente */
+        body {
+            background-color: #181a1c;
+            color: white;
+            font-family: Monospace, sans-serif;
+        }
+        /* Estilos para subrayar texto */
+        em {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <h1>volteret4</h1>
+    </header>
+    <aside>
+        <ul id="post-index"></ul>
+    </aside>
     <div id="post-content"></div>
 
     <script>
+        // Función para llenar la barra lateral con el índice de posts
+        function createPostIndex(posts) {
+            const ul = document.getElementById('post-index');
+            posts.forEach((post, index) => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = `post.html?postIndex=${index}`;
+                a.textContent = post.title;
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+        }
+
         // Función para cargar el contenido del post desde el archivo JSON
         function loadPostContent(postIndex) {
             const xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     const posts = JSON.parse(xhr.responseText);
+                    createPostIndex(posts);
                     const post = posts[postIndex];
                     const title = post.title;
                     const image = post.image;
