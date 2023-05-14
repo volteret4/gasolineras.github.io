@@ -48,9 +48,19 @@
         .index .folder.opened ul {
             display: block;
         }
-        #post-content {
-            margin-left: 220px;
-            padding-top: 60px;
+                /* Estilos para el contenedor de los últimos posts y elementos individuales */
+        #latest-posts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        }
+        .post-container {
+        width: calc(33.333% - 10px); /* Restar 10px para tener en cuenta el margen */
+        margin-bottom: 10px;
+        }
+        .post-container img {
+        width: 100%;
+        height: auto;
         }
         /* Estilos para el fondo, color de letra y fuente */
         body {
@@ -123,7 +133,7 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     const posts = JSON.parse(xhr.responseText);
-                    const numberOfPostsToShow = 9;
+                    const numberOfPostsToShow = 30;
                     const latestPosts = posts.slice(-numberOfPostsToShow);
                     const latestPostsContainer = document.getElementById('latest-posts');
                     latestPostsContainer.style.display = 'flex';
