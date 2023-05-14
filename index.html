@@ -108,7 +108,7 @@
                     const post = posts.blog[postKey];
                     const nestedLi = document.createElement('li');
                     const nestedA = document.createElement('a');
-                    nestedA.href = `post.html?postIndex=${index}`;
+                    nestedA.href = `post.html?postTitle=${postKey}`;
                     nestedA.textContent = postKey;
                     nestedLi.appendChild(nestedA);
                     nestedUl.appendChild(nestedLi);
@@ -164,7 +164,7 @@
                         `;
                         latestPostsContainer.appendChild(postContainer);
                         postContainer.addEventListener('click', function() {
-                            window.location.href = `post.html?postIndex=${latestPostsKeys.length - numberOfPostsToShow + i}`;
+                            window.location.href = `post.html?postTitle=${postKey}`;
                         });
                     });
                 }
