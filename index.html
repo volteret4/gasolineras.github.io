@@ -3,38 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>viciosmusicales</title>
+    <title>Portada del sitio</title>
+    <style>
+        .post-container {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div id="latest-posts"></div>
 
     <script>
-        // Función para cargar el contenido de un archivo HTML de post y extraer el título e imagen
-        function loadPostData(postNumber) {
+        // Función para mostrar los últimos 3 posts y enlazar a las páginas dinámicas
+        function displayLatestPosts() {
             const xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                    const parser = new DOMParser();
-                    const htmlDoc = parser.parseFromString(xhr.responseText, 'text/html');
-                    const title = htmlDoc.querySelector('title').textContent;
-                    const image = htmlDoc.querySelector('img').src;
-                    const postContainer = document.createElement('div');
-                    postContainer.innerHTML = `
-                        <h2>${title}</h2>
-                        <img src="${image}" alt="${title}">
-                    `;
-                    document.getElementById('latest-posts').appendChild(postContainer);
+                    const posts = JSON.parse(xhr.responseText);
+                    const numberOfPostsToShow = 3;
+                    const latestPosts = posts.slice(-numberOfPostsToShow);
+                    latestPosts.forEach((post, i) => {
+                        const postContainer = document.createElement('div');
+                        postContainer.classList.add('post-container');
+                        postContainer.innerHTML = `
+                            <h2>${post.title}</h2>
+                            <img src="${post.image}" alt="${post.title}">
+                        `;
+                        document.getElementById('latest-posts').appendChild(postContainer);
+                        postContainer.addEventListener('click', function() {
+                            window.location.href = `post.html?postIndex=${posts.length - numberOfPostsToShow + i}`;
+                        });
+                    });
                 }
             };
-            xhr.open('GET', `blog/posts/${postNumber}.html`, true);
+            xhr.open('GET', 'posts.json', true);
             xhr.send();
         }
 
-        // Cargar los últimos posts
-        const numberOfPostsToShow = 3;
-        for (let i = 1; i <= numberOfPostsToShow; i++) {
-            loadPostData(`14-05-${i}`);
-        }
+        displayLatestPosts();
     </script>
 </body>
 </html>
