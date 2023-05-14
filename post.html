@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+</head>
+<body>
+    <div id="post-content"></div>
+
+    <script>
+        // Función para cargar el contenido del post desde el archivo JSON
+        function loadPostContent(postIndex) {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const posts = JSON.parse(xhr.responseText);
+                    const post = posts[postIndex];
+                    const title = post.title;
+                    const image = post.image;
+                    const description = post.description;
+                    const content = post.content;
+                    const postContainer = document.createElement('div');
+                    postContainer.innerHTML = `
+                        <h2>${title}</h2>
+                        <img src="${image}" alt="${title}">
+                        <p>${description}</p>
+                        <div>${content}</div>
+                    `;
+                    document.getElementById('post-content').appendChild(postContainer);
+                }
+            };
+            xhr.open('GET', 'posts.json', true);
+            xhr.send();
+        }
+
+        // Obtener el índice del post desde la URL y cargar el contenido del post
+        const urlParams = new URLSearchParams(window.location.search);
+        const postIndex = urlParams.get('postIndex');
+        loadPostContent(postIndex);
+    </script>
+</body>
+</html>
