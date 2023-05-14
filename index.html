@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portada del sitio</title>
+    <title>volteret4</title>
     <style>
         body {
             background-color: #181a1c;
@@ -21,9 +21,54 @@
             width: 100%;
             height: auto;
         }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 200px;
+            background-color: #252729;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: scroll;
+        }
+        .sidebar h3 {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar li {
+            margin: 10px 0;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+        .site-title {
+            position: absolute;
+            top: 0;
+            left: 220px;
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+    <div class="sidebar">
+        <h3>Índice</h3>
+        <ul id="post-list"></ul>
+    </div>
+    <h1 class="site-title">volteret4</h1>
     <div id="latest-posts"></div>
 
     <script>
@@ -49,6 +94,15 @@
                         postContainer.addEventListener('click', function() {
                             window.location.href = `post.html?postIndex=${posts.length - numberOfPostsToShow + i}`;
                         });
+                    });
+                    const postList = document.getElementById('post-list');
+                    posts.forEach((post, i) => {
+                        const listItem = document.createElement('li');
+                        const link = document.createElement('a');
+                        link.href = `post.html?postIndex=${i}`;
+                        link.textContent = post.title;
+                        listItem.appendChild(link);
+                        postList.appendChild(listItem);
                     });
                 }
             };
