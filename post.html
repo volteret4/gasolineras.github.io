@@ -142,6 +142,11 @@
                     postContent.appendChild(postTitle);
                     const postImage = document.createElement('img');
                     postImage.src = image;
+                    const postImage = document.createElement('img');
+                    postImage.src = image;
+                    postImage.style.maxWidth = '600px';
+                    postImage.style.maxHeight = '600px';
+                    postContent.appendChild(postImage);
                     postContent.appendChild(postImage);
                     const postDate = document.createElement('p');
                     postDate.textContent = date;
