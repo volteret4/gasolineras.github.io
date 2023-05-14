@@ -76,35 +76,35 @@
 
 <script>
     // Función para agrupar los posts por mes y año
-    function createPostIndex(posts) {
-        const index = document.getElementById('post-index');
-        const groupedPosts = groupByMonth(posts);
-        Object.entries(groupedPosts).forEach(([monthYear, monthPosts]) => {
-            const folder = document.createElement('div');
-            folder.classList.add('folder');
-            // Obtener el nombre del mes a partir del número de mes
-            const dateParts = monthYear.split('-');
-            const monthName = new Date(dateParts[1], dateParts[0] - 1).toLocaleString('es', { month: 'long' });
-            folder.textContent = `${monthName} ${dateParts[0]}`;
-            index.appendChild(folder);
-            const nestedUl = document.createElement('ul');
-            monthPosts.forEach((postKey, index) => {
-                const post = posts.blog[postKey];
-                const nestedLi = document.createElement('li');
-                const nestedA = document.createElement('a');
-                nestedA.href = `post.html?postTitle=${postKey}`;
-                nestedA.textContent = postKey;
-                nestedLi.appendChild(nestedA);
-                nestedUl.appendChild(nestedLi);
-            });
-            folder.appendChild(nestedUl);
-            // Agregar un controlador de eventos click para hacer que los elementos de la barra lateral sean interactivos
-            folder.addEventListener('click', () => {
-                folder.classList.toggle('opened');
-            });
-        });
-    }
-
+	function createPostIndex(posts) {
+		const index = document.getElementById('post-index');
+		const groupedPosts = groupByMonth(posts);
+		Object.entries(groupedPosts).forEach(([monthYear, monthPosts]) => {
+			const folder = document.createElement('div');
+			folder.classList.add('folder');
+			// Obtener el nombre del mes completo y las dos últimas cifras del año a partir de la cadena "mes-año"
+			const dateParts = monthYear.split('-');
+			const monthName = new Date(dateParts[1], dateParts[0] - 1).toLocaleString('es', { month: 'long' });
+			const year = dateParts[1].slice(-2);
+			folder.textContent = `${monthName} ${year}`;
+			index.appendChild(folder);
+			const nestedUl = document.createElement('ul');
+			monthPosts.forEach((postKey, index) => {
+				const post = posts.blog[postKey];
+				const nestedLi = document.createElement('li');
+				const nestedA = document.createElement('a');
+				nestedA.href = `post.html?postTitle=${postKey}`;
+				nestedA.textContent = postKey;
+				nestedLi.appendChild(nestedA);
+				nestedUl.appendChild(nestedLi);
+			});
+			folder.appendChild(nestedUl);
+			// Agregar un controlador de eventos click para hacer que los elementos de la barra lateral sean interactivos
+			folder.addEventListener('click', () => {
+				folder.classList.toggle('opened');
+			});
+		});
+	}
     function groupByMonth(posts) {
         const blogPosts = posts.blog;
         const groupedPosts = {};
