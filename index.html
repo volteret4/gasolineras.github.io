@@ -129,31 +129,35 @@
         }
         // Función para mostrar los últimos 9 posts y enlazar a las páginas dinámicas
         function displayLatestPosts() {
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    const posts = JSON.parse(xhr.responseText);
-                    const numberOfPostsToShow = 30;
-                    const latestPosts = posts.slice(-numberOfPostsToShow);
-                    const latestPostsContainer = document.getElementById('latest-posts');
-                    latestPostsContainer.style.display = 'flex';
-                    latestPostsContainer.style.flexWrap = 'wrap';
-                    latestPosts.forEach((post, i) => {
-                        const postContainer = document.createElement('div');
-                        postContainer.classList.add('post-container');
-                        postContainer.innerHTML = `
-                            <img src="${post.image}" alt="${post.title}">
-                            <h2>${post.title}</h2>
-                        `;
-                        latestPostsContainer.appendChild(postContainer);
-                        postContainer.addEventListener('click', function() {
-                            window.location.href = `post.html?postIndex=${posts.length - numberOfPostsToShow + i}`;
-                        });
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const posts = JSON.parse(xhr.responseText);
+
+                // Llamar a la función createPostIndex() aquí
+                createPostIndex(posts);
+
+                const numberOfPostsToShow = 30;
+                const latestPosts = posts.slice(-numberOfPostsToShow);
+                const latestPostsContainer = document.getElementById('latest-posts');
+                latestPostsContainer.style.display = 'flex';
+                latestPostsContainer.style.flexWrap = 'wrap';
+                latestPosts.forEach((post, i) => {
+                    const postContainer = document.createElement('div');
+                    postContainer.classList.add('post-container');
+                    postContainer.innerHTML = `
+                        <img src="${post.image}" alt="${post.title}">
+                        <h2>${post.title}</h2>
+                    `;
+                    latestPostsContainer.appendChild(postContainer);
+                    postContainer.addEventListener('click', function() {
+                        window.location.href = `post.html?postIndex=${posts.length - numberOfPostsToShow + i}`;
                     });
-                }
-            };
-            xhr.open('GET', 'posts.json', true);
-            xhr.send();
+                });
+            }
+        };
+        xhr.open('GET', 'posts.json', true);
+        xhr.send();
         }
         // Obtener el índice del post de la URL
         const queryString = window.location.search;
