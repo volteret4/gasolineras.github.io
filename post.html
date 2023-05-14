@@ -125,32 +125,32 @@
         }
 
         // Función para cargar el contenido del post desde el archivo JSON
-        function loadPostContent(postIndex) {
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    const posts = JSON.parse(xhr.responseText);
-                    createPostIndex(posts);
-                    const post = Object.values(posts.blog)[postIndex];
-                    const title = Object.keys(posts.blog)[postIndex];
-                    const image = post.img;
-                    const content = post.descripcion;
-                    const date = new Date(post["fecha_publicacion"]).toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric'});
-                    const postContent = document.getElementById('post-content');
-                    const postTitle = document.createElement('h2');
-                    postTitle.textContent = title;
-                    postContent.appendChild(postTitle);
-                    const postImage = document.createElement('img');
-                    postImage.src = image;
-                    postContent.appendChild(postImage);
-                    const postDate = document.createElement('p');
-                    postDate.textContent = date;
-                    postContent.appendChild(postDate);
-                    const postContentPara = document.createElement('p');
-                    postContentPara.innerHTML = content;
-                    postContent.appendChild(postContentPara);
-                }
-            };
+        function loadPostContent(postName) {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const posts = JSON.parse(xhr.responseText);
+                createPostIndex(posts);
+                const post = posts.blog[postName];
+                const title = postName;
+                const image = post.img;
+                const content = post.descripcion;
+                const date = new Date(post["fecha_publicacion"]).toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric'});
+                const postContent = document.getElementById('post-content');
+                const postTitle = document.createElement('h2');
+                postTitle.textContent = title;
+                postContent.appendChild(postTitle);
+                const postImage = document.createElement('img');
+                postImage.src = image;
+                postContent.appendChild(postImage);
+                const postDate = document.createElement('p');
+                postDate.textContent = date;
+                postContent.appendChild(postDate);
+                const postContentPara = document.createElement('p');
+                postContentPara.innerHTML = content;
+                postContent.appendChild(postContentPara);
+            }
+        };
         xhr.open('GET', 'posts.json');
         xhr.send();
         }
