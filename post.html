@@ -71,27 +71,31 @@
     <div id="post-content"></div>
 
     <script>
-        // Función para llenar la barra lateral con el índice de posts
+        // Función para agrupar los posts por mes y año
         function groupByMonth(posts) {
-        const groupedPosts = {};
-        posts.forEach((post) => {
-            const dateParts = post.fecha.split('-');
-            const monthYear = `${dateParts[1]}-${dateParts[2]}`;
-            if (!groupedPosts[monthYear]) {
-                groupedPosts[monthYear] = [];
-            }
-            groupedPosts[monthYear].push(post);
-        });
-        return groupedPosts;
+            const groupedPosts = {};
+            posts.forEach((post) => {
+                const dateParts = post.fecha.split('-');
+                const monthYear = `${dateParts[1]}-${dateParts[2]}`;
+                if (!groupedPosts[monthYear]) {
+                    groupedPosts[monthYear] = [];
+                }
+                groupedPosts[monthYear].push(post);
+            });
+            return groupedPosts;
         }
 
+        // Función para crear el índice de posts en la barra lateral
         function createPostIndex(posts) {
             const index = document.getElementById('post-index');
             const groupedPosts = groupByMonth(posts);
             Object.entries(groupedPosts).forEach(([monthYear, monthPosts]) => {
                 const folder = document.createElement('div');
                 folder.classList.add('folder');
-                folder.textContent = monthYear;
+                // Obtener el nombre del mes a partir del número de mes
+                const dateParts = monthYear.split('-');
+                const monthName = new Date(dateParts[1], dateParts[0] - 1).toLocaleString('es', { month: 'long' });
+                folder.textContent = `${monthName} ${dateParts[0]}`;
                 index.appendChild(folder);
                 const nestedUl = document.createElement('ul');
                 monthPosts.forEach((post, index) => {
@@ -103,6 +107,10 @@
                     nestedUl.appendChild(nestedLi);
                 });
                 folder.appendChild(nestedUl);
+                // Agregar un controlador de eventos click para hacer que los elementos de la barra lateral sean interactivos
+                folder.addEventListener('click', () => {
+                    folder.classList.toggle('opened');
+                });
             });
         }
 
@@ -116,24 +124,33 @@
                     const post = posts[postIndex];
                     const title = post.title;
                     const image = post.image;
-                    const description = post.description;
                     const content = post.content;
-                    const postContainer = document.createElement('div');
-                    postContainer.innerHTML = `
-                        <h2>${title}</h2>
-                        <img src="${image}" alt="${title}" style="max-width: 600px; max-height: 600px;">                        <p>${description}</p>
-                        <div>${content}</div>
-                    `;
-                    document.getElementById('post-content').appendChild(postContainer);
+                    const date = new Date(post.fecha).toLocaleDateString('es', { year: 'numeric', month: 'long', day: 'numeric' });
+                    const postContent = document.getElementById('post-content');
+                    const postTitle = document.createElement('h2');
+                    postTitle.textContent = title;
+                    postContent.appendChild(postTitle);
+                    const postImage = document.createElement('img');
+                    postImage.src = image;
+                    postContent.appendChild(postImage);
+                    const postDate = document.createElement('p');
+                    postDate.textContent = date;
+                    postContent.appendChild(postDate);
+                    const postContentPara = document.createElement('p');
+                    postContentPara.innerHTML = content;
+                    postContent.appendChild(postContentPara);
                 }
             };
-            xhr.open('GET', 'posts.json', true);
+            xhr.open('GET', 'posts.json');
             xhr.send();
         }
 
-        // Obtener el índice del post desde la URL y cargar el contenido del post
-        const urlParams = new URLSearchParams(window.location.search);
+        // Obtener el índice del post de la URL
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
         const postIndex = urlParams.get('postIndex');
+
+        // Cargar el contenido del post correspondiente
         loadPostContent(postIndex);
     </script>
 </body>
