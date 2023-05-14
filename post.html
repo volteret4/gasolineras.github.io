@@ -28,23 +28,24 @@
             background-color: #181a1c;
             padding-top: 60px;
             overflow-y: auto;
+            margin-right: 20px;
         }
-        aside ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
+        .index {
+            font-size: 16px;
+            margin-left: 20px;
         }
-        aside li a {
+        .index .folder {
+            cursor: pointer;
+        }
+        .index ul {
+            display: none;
+            margin-left: 20px;
+        }
+        .index .folder.opened ul {
             display: block;
-            padding: 5px 10px;
-            color: white;
-            text-decoration: none;
-        }
-        aside li a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
         }
         #post-content {
-            margin-left: 200px;
+            margin-left: 220px;
             padding-top: 60px;
         }
         /* Estilos para el fondo, color de letra y fuente */
@@ -65,9 +66,9 @@
     </header>
     <aside>
         <h2><a href="index.html">volteret4</a></h2>
-        <ul id="post-index"></ul>
+        <div class="index" id="post-index"></div>
     </aside>
-    <div id="post-content" style="margin-left: 220px;"></div>
+    <div id="post-content"></div>
 
     <script>
         // Función para llenar la barra lateral con el índice de posts
@@ -85,17 +86,14 @@
         }
 
         function createPostIndex(posts) {
-            const ul = document.getElementById('post-index');
+            const index = document.getElementById('post-index');
             const groupedPosts = groupByMonth(posts);
             Object.entries(groupedPosts).forEach(([monthYear, monthPosts]) => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = `#${monthYear}`;
-                a.textContent = monthYear;
-                li.appendChild(a);
-                ul.appendChild(li);
+                const folder = document.createElement('div');
+                folder.classList.add('folder');
+                folder.textContent = monthYear;
+                index.appendChild(folder);
                 const nestedUl = document.createElement('ul');
-                nestedUl.id = monthYear;
                 monthPosts.forEach((post, index) => {
                     const nestedLi = document.createElement('li');
                     const nestedA = document.createElement('a');
@@ -104,7 +102,7 @@
                     nestedLi.appendChild(nestedA);
                     nestedUl.appendChild(nestedLi);
                 });
-                ul.appendChild(nestedUl);
+                folder.appendChild(nestedUl);
             });
         }
 
