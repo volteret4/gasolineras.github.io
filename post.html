@@ -64,21 +64,47 @@
         <h1>volteret4</h1>
     </header>
     <aside>
+        <h2>volteret4</h2>
         <ul id="post-index"></ul>
     </aside>
     <div id="post-content"></div>
 
     <script>
         // Función para llenar la barra lateral con el índice de posts
+        function groupByMonth(posts) {
+        const groupedPosts = {};
+        posts.forEach((post) => {
+            const dateParts = post.fecha.split('-');
+            const monthYear = `${dateParts[1]}-${dateParts[2]}`;
+            if (!groupedPosts[monthYear]) {
+                groupedPosts[monthYear] = [];
+            }
+            groupedPosts[monthYear].push(post);
+        });
+        return groupedPosts;
+        }
+
         function createPostIndex(posts) {
             const ul = document.getElementById('post-index');
-            posts.forEach((post, index) => {
+            const groupedPosts = groupByMonth(posts);
+            Object.entries(groupedPosts).forEach(([monthYear, monthPosts]) => {
                 const li = document.createElement('li');
                 const a = document.createElement('a');
-                a.href = `post.html?postIndex=${index}`;
-                a.textContent = post.title;
+                a.href = `#${monthYear}`;
+                a.textContent = monthYear;
                 li.appendChild(a);
                 ul.appendChild(li);
+                const nestedUl = document.createElement('ul');
+                nestedUl.id = monthYear;
+                monthPosts.forEach((post, index) => {
+                    const nestedLi = document.createElement('li');
+                    const nestedA = document.createElement('a');
+                    nestedA.href = `post.html?postIndex=${index}`;
+                    nestedA.textContent = post.title;
+                    nestedLi.appendChild(nestedA);
+                    nestedUl.appendChild(nestedLi);
+                });
+                ul.appendChild(nestedUl);
             });
         }
 
