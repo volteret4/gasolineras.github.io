@@ -1,90 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-	<title>Ejemplo de tabla dinámica con JSON</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<style>
-		table {
-			font-family: Arial, sans-serif;
-			border-collapse: collapse;
-			width: 100%;
-			max-width: 800px;
-			margin: 20px auto;
-		}
-
-		th, td {
-			text-align: left;
-			padding: 8px;
-			border-bottom: 1px solid #ddd;
-		}
-
-		tr:hover {
-			background-color: #f5f5f5;
-		}
-
-		th {
-			background-color: #4CAF50;
-			color: white;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>viciosmusicales</title>
 </head>
 <body>
+    <div id="latest-posts"></div>
 
-	<h1>Ejemplo de tabla dinámica con JSON</h1>
+    <script>
+        // Función para cargar el contenido de un archivo HTML de post y extraer el título e imagen
+        function loadPostData(postNumber) {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const parser = new DOMParser();
+                    const htmlDoc = parser.parseFromString(xhr.responseText, 'text/html');
+                    const title = htmlDoc.querySelector('title').textContent;
+                    const image = htmlDoc.querySelector('img').src;
+                    const postContainer = document.createElement('div');
+                    postContainer.innerHTML = `
+                        <h2>${title}</h2>
+                        <img src="${image}" alt="${title}">
+                    `;
+                    document.getElementById('latest-posts').appendChild(postContainer);
+                }
+            };
+            xhr.open('GET', `blog/posts/${postNumber}.html`, true);
+            xhr.send();
+        }
 
-	<table>
-		<thead>
-			<tr>
-				<th>Rótulo</th>
-				<th>Municipio</th>
-				<th>Dirección</th>
-				<th>Diesel</th>
-				<th>95</th>
-				<th>98</th>
-				<th>Ver en mapa</th> <!-- Añadimos la columna para el botón -->
-			</tr>
-		</thead>
-		<tbody id="tabla-dinamica"></tbody>
-	</table>
-
-	<script>
-		// Carga el archivo JSON
-		fetch('./gasolineras_cercanas.json')
-			.then(response => response.json())
-			.then(data => {
-				// Recorre los datos del JSON y crea las filas de la tabla
-				data.forEach(p => {
-					const fila = document.createElement('tr');
-					const Rotulo = document.createElement('td');
-					Rotulo.textContent = p.Rotulo;
-					const Municipio = document.createElement('td');
-					Municipio.textContent = p.Municipio;
-					const Direccion = document.createElement('td');
-					Direccion.textContent = p.Direccion;
-					const Diesel = document.createElement('td');
-					Diesel.textContent = p['Precio Gasoleo A'];
-					const Gasolina95 = document.createElement('td');
-					Gasolina95.textContent = p['Precio Gasolina 95 E5'];
-					const Gasolina98 = document.createElement('td');
-					Gasolina98.textContent = p['Precio Gasolina 98 E5'];
-					const boton = document.createElement('td'); // Creamos la celda para el botón
-					const botonEnlace = document.createElement('a'); // Creamos el enlace del botón
-					botonEnlace.href = `https://www.google.com/maps/search/${p.Direccion}+${p.Municipio}`; // Asignamos la URL del enlace
-					botonEnlace.textContent = 'Ver en mapa'; // Texto del botón
-					botonEnlace.target = '_blank'; // Abrimos en una nueva pestaña
-					boton.appendChild(botonEnlace); // Añadimos el enlace al botón
-					fila.appendChild(Rotulo);
-					fila.appendChild(Municipio);
-					fila.appendChild(Direccion);
-					fila.appendChild(Diesel);
-					fila.appendChild(Gasolina95);
-					fila.appendChild(Gasolina98);
-					fila.appendChild(boton); // Añadimos la celda del botón a la fila
-					document.getElementById('tabla-dinamica').appendChild(fila);
-				});
-			});
-	</script>
-
+        // Cargar los últimos posts
+        const numberOfPostsToShow = 3;
+        for (let i = 1; i <= numberOfPostsToShow; i++) {
+            loadPostData(`14-05-${i}`);
+        }
+    </script>
 </body>
-</html
+</html>
