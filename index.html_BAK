@@ -90,8 +90,21 @@
     <div id="latest-posts"></div>
 
     <script>
+        // Función para agrupar los posts por mes y año
+        function groupByMonth(posts) {
+            const groupedPosts = {};
+            posts.forEach((post) => {
+                const dateParts = post.fecha.split('-');
+                const monthYear = `${dateParts[1]}-${dateParts[2]}`;
+                if (!groupedPosts[monthYear]) {
+                    groupedPosts[monthYear] = [];
+                }
+                groupedPosts[monthYear].push(post);
+            });
+            return groupedPosts;
+        }
 
-// Función para agrupar los posts por mes y año
+        // Función para crear el índice de posts en la barra lateral
         function createPostIndex(posts) {
             const index = document.getElementById('post-index');
             const groupedPosts = groupByMonth(posts);
@@ -104,12 +117,11 @@
                 folder.textContent = `${monthName} ${dateParts[0]}`;
                 index.appendChild(folder);
                 const nestedUl = document.createElement('ul');
-                monthPosts.forEach((postKey, index) => {
-                    const post = posts.blog[postKey];
+                monthPosts.forEach((post, index) => {
                     const nestedLi = document.createElement('li');
                     const nestedA = document.createElement('a');
                     nestedA.href = `post.html?postIndex=${index}`;
-                    nestedA.textContent = postKey;
+                    nestedA.textContent = post.title;
                     nestedLi.appendChild(nestedA);
                     nestedUl.appendChild(nestedLi);
                 });
@@ -120,65 +132,44 @@
                 });
             });
         }
-
-        function groupByMonth(posts) {
-            const blogPosts = posts.blog;
-            const groupedPosts = {};
-
-            for (const postKey in blogPosts) {
-                const post = blogPosts[postKey];
-                const dateParts = post.fecha_publicacion.split('-');
-                const monthYear = `${dateParts[1]}-${dateParts[0]}`;
-
-                if (!groupedPosts[monthYear]) {
-                    groupedPosts[monthYear] = [];
-                }
-
-                groupedPosts[monthYear].push(postKey);
-            }
-
-            return groupedPosts;
-        }
         // Función para mostrar los últimos 9 posts y enlazar a las páginas dinámicas
         function displayLatestPosts() {
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    const posts = JSON.parse(xhr.responseText);
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const posts = JSON.parse(xhr.responseText);
 
-                    // Llamar a la función createPostIndex() aquí
-                    createPostIndex(posts);
+                // Llamar a la función createPostIndex() aquí
+                createPostIndex(posts);
 
-                    const numberOfPostsToShow = 30;
-                    const latestPostsKeys = Object.keys(posts.blog).slice(-numberOfPostsToShow);
-                    const latestPostsContainer = document.getElementById('latest-posts');
-                    latestPostsContainer.style.display = 'flex';
-                    latestPostsContainer.style.flexWrap = 'wrap';
-                    latestPostsKeys.forEach((postKey, i) => {
-                        const post = posts.blog[postKey];
-                        const postContainer = document.createElement('div');
-                        postContainer.classList.add('post-container');
-                        postContainer.innerHTML = `
-                            <img src="${post.img}" alt="${postKey}">
-                            <h2>${postKey}</h2>
-                        `;
-                        latestPostsContainer.appendChild(postContainer);
-                        postContainer.addEventListener('click', function() {
-                            window.location.href = `post.html?postIndex=${latestPostsKeys.length - numberOfPostsToShow + i}`;
-                        });
+                const numberOfPostsToShow = 30;
+                const latestPosts = posts.slice(-numberOfPostsToShow);
+                const latestPostsContainer = document.getElementById('latest-posts');
+                latestPostsContainer.style.display = 'flex';
+                latestPostsContainer.style.flexWrap = 'wrap';
+                latestPosts.forEach((post, i) => {
+                    const postContainer = document.createElement('div');
+                    postContainer.classList.add('post-container');
+                    postContainer.innerHTML = `
+                        <img src="${post.image}" alt="${post.title}">
+                        <h2>${post.title}</h2>
+                    `;
+                    latestPostsContainer.appendChild(postContainer);
+                    postContainer.addEventListener('click', function() {
+                        window.location.href = `post.html?postIndex=${posts.length - numberOfPostsToShow + i}`;
                     });
-                }
-            };
-            xhr.open('GET', 'posts.json', true);
-            xhr.send();
+                });
+            }
+        };
+        xhr.open('GET', 'posts.json', true);
+        xhr.send();
         }
+        // Obtener el índice del post de la URL
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const postIndex = urlParams.get('postIndex');
 
-// Obtener el índice del post de la URL
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const postIndex = urlParams.get('postIndex');
-
-displayLatestPosts();
+        displayLatestPosts();
     </script>
 </body>
 </html>
