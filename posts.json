@@ -4,7 +4,7 @@
             "artista": "nirvana",
             "disco": "in utero",
             "fecha lanzamiento": "1-1-1980",
-            "img": "blog/img/test_1,jpg",
+            "img": "./blog/img/test_1.jpg",
             "descripcion": "blablabla",
             "fecha_publicacion": "15-02-23",
             "links": "https..."
@@ -13,7 +13,7 @@
             "artista": "nirvana",
             "disco": "in utero",
             "fecha lanzamiento": "1-1-1980",
-            "img": "blog/img/test_2.jpg",
+            "img": "./blog/img/test_2.jpg",
             "descripcion": "blablabla",
             "fecha_publicacion": "11-02-23",
             "links": "https..."
@@ -22,7 +22,7 @@
             "artista": "nirvana",
             "disco": "in utero",
             "fecha lanzamiento": "1-1-1980",
-            "img": "blog/img/test_3.jpg",
+            "img": "./blog/img/test_3.jpg",
             "descripcion": "blablabla",
             "fecha_publicacion": "15-04-23",
             "links": "https..."
@@ -33,7 +33,7 @@
             "fecha lanzamiento": "1-1-1980",
             "img": "...",
             "descripcion": "...",
-            "fecha_publicacion": "..15-03-23",
+            "fecha_publicacion": "15-03-23",
             "links": "..."
         }
     }
