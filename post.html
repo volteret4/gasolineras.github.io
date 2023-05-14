@@ -123,8 +123,7 @@
                     const postContainer = document.createElement('div');
                     postContainer.innerHTML = `
                         <h2>${title}</h2>
-                        <img src="${image}" alt="${title}">
-                        <p>${description}</p>
+                        <img src="${image}" alt="${title}" style="max-width: 600px; max-height: 600px;">                        <p>${description}</p>
                         <div>${content}</div>
                     `;
                     document.getElementById('post-content').appendChild(postContainer);
