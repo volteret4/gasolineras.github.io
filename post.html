@@ -131,7 +131,7 @@
             if (xhr.readyState === 4 && xhr.status === 200) {
                 const posts = JSON.parse(xhr.responseText);
                 createPostIndex(posts);
-                const post = posts.blog[postTitle];
+                const post = posts.blog[postName];
                 const title = postName;
                 const image = post.img;
                 const content = post.descripcion;
@@ -161,7 +161,7 @@
         const postTitle = urlParams.get('postTitle');
 
         // Cargar el contenido del post correspondiente
-        loadPostContent(postIndex);
+        loadPostContent(postTitle);
     </script>
 </body>
 </html>
