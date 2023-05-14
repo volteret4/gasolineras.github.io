@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post</title>
+    <title>volteret4</title>
     <style>
         /* Estilos para el header y la barra lateral */
         header {
@@ -30,6 +30,9 @@
             overflow-y: auto;
             margin-right: 20px;
         }
+        a:visited {
+        color: lightgray;
+        }
         .index {
             font-size: 16px;
             margin-left: 20px;
@@ -48,9 +51,21 @@
         .index .folder.opened ul {
             display: block;
         }
-        #post-content {
-            margin-left: 220px;
-            padding-top: 60px;
+                /* Estilos para el contenedor de los últimos posts y elementos individuales */
+        #latest-posts {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 80px; /* ajusta el valor según la altura de la barra superior vacía */
+        margin-left: 220px; /* Ancho de la barra lateral más margen derecho */
+        justify-content: space-between;
+        }
+        .post-container {
+        width: calc(33.333% - 10px); /* Restar 10px para tener en cuenta el margen */
+        margin-bottom: 10px;
+        }
+        .post-container img {
+        width: 100%;
+        height: auto;
         }
         /* Estilos para el fondo, color de letra y fuente */
         body {
@@ -72,10 +87,11 @@
         <h2><a href="index.html">volteret4</a></h2>
         <div class="index" id="post-index"></div>
     </aside>
-    <div id="post-content"></div>
+    <div id="latest-posts"></div>
 
     <script>
-        // Función para agrupar los posts por mes y año
+
+// Función para agrupar los posts por mes y año
         function createPostIndex(posts) {
             const index = document.getElementById('post-index');
             const groupedPosts = groupByMonth(posts);
@@ -123,45 +139,46 @@
 
             return groupedPosts;
         }
-
-        // Función para cargar el contenido del post desde el archivo JSON
-        function loadPostContent(postIndex) {
+        // Función para mostrar los últimos 9 posts y enlazar a las páginas dinámicas
+        function displayLatestPosts() {
             const xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     const posts = JSON.parse(xhr.responseText);
+
+                    // Llamar a la función createPostIndex() aquí
                     createPostIndex(posts);
-                    const post = Object.values(posts.blog)[postIndex];
-                    const title = Object.keys(posts.blog)[postIndex];
-                    const image = post.img;
-                    const content = post.descripcion;
-                    const date = new Date(post["fecha_publicacion"]).toLocaleDateString('es', { year: 'numeric', month: 'long', day: 'numeric' });
-                    const postContent = document.getElementById('post-content');
-                    const postTitle = document.createElement('h2');
-                    postTitle.textContent = title;
-                    postContent.appendChild(postTitle);
-                    const postImage = document.createElement('img');
-                    postImage.src = image;
-                    postContent.appendChild(postImage);
-                    const postDate = document.createElement('p');
-                    postDate.textContent = date;
-                    postContent.appendChild(postDate);
-                    const postContentPara = document.createElement('p');
-                    postContentPara.innerHTML = content;
-                    postContent.appendChild(postContentPara);
+
+                    const numberOfPostsToShow = 30;
+                    const latestPostsKeys = Object.keys(posts.blog).slice(-numberOfPostsToShow);
+                    const latestPostsContainer = document.getElementById('latest-posts');
+                    latestPostsContainer.style.display = 'flex';
+                    latestPostsContainer.style.flexWrap = 'wrap';
+                    latestPostsKeys.forEach((postKey, i) => {
+                        const post = posts.blog[postKey];
+                        const postContainer = document.createElement('div');
+                        postContainer.classList.add('post-container');
+                        postContainer.innerHTML = `
+                            <img src="${post.img}" alt="${postKey}">
+                            <h2>${postKey}</h2>
+                        `;
+                        latestPostsContainer.appendChild(postContainer);
+                        postContainer.addEventListener('click', function() {
+                            window.location.href = `post.html?postIndex=${latestPostsKeys.length - numberOfPostsToShow + i}`;
+                        });
+                    });
                 }
             };
-        xhr.open('GET', 'posts.json');
-        xhr.send();
+            xhr.open('GET', 'posts.json', true);
+            xhr.send();
         }
 
-        // Obtener el índice del post de la URL
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const postIndex = urlParams.get('postIndex');
+// Obtener el índice del post de la URL
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const postIndex = urlParams.get('postIndex');
 
-        // Cargar el contenido del post correspondiente
-        loadPostContent(postIndex);
+displayLatestPosts();
     </script>
 </body>
 </html>
