@@ -5,73 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>volteret4</title>
     <style>
+        /* Estilos para el header y la barra lateral */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #181a1c;
+            padding: 10px;
+        }
+        header h1 {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+        }
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100%;
+            background-color: #181a1c;
+            padding-top: 60px;
+            overflow-y: auto;
+            margin-right: 20px;
+        }
+        .index {
+            font-size: 16px;
+            margin-left: 20px;
+        }
+        .index .folder {
+            cursor: pointer;
+        }
+        .index ul {
+            display: none;
+            margin-left: 1px;
+        }
+        /* Estilos para reducir el margen izquierdo de cada elemento dentro del índice de cada mes */
+        .index ul li {
+            margin-left: 1px;
+        }
+        .index .folder.opened ul {
+            display: block;
+        }
+        #post-content {
+            margin-left: 220px;
+            padding-top: 60px;
+        }
+        /* Estilos para el fondo, color de letra y fuente */
         body {
             background-color: #181a1c;
             color: white;
             font-family: Monospace, sans-serif;
         }
-        .post-container {
-            display: inline-block;
-            width: calc(33.33% - 10px);
-            margin: 5px;
-            box-sizing: border-box;
-            cursor: pointer;
-        }
-        .post-container img {
-            width: 100%;
-            height: auto;
-        }
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 200px;
-            background-color: #252729;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow-y: scroll;
-        }
-        .sidebar h3 {
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 0;
-        }
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .sidebar li {
-            margin: 10px 0;
-        }
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-        }
-        .sidebar a:hover {
+        /* Estilos para subrayar texto */
+        em {
             text-decoration: underline;
-        }
-        .site-title {
-            position: absolute;
-            top: 0;
-            left: 220px;
-            color: white;
-            font-size: 36px;
-            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <h3>Índice</h3>
-        <ul id="post-list"></ul>
-    </div>
-    <h1 class="site-title">volteret4</h1>
-    <div id="latest-posts"></div>
+    <header>
+        <h1>volteret4</h1>
+    </header>
+    <aside>
+        <h2><a href="index.html">volteret4</a></h2>
+        <div class="index" id="post-index"></div>
+    </aside>
+    <div id="post-content"></div>
 
     <script>
+        // Función para agrupar los posts por mes y año
+        function groupByMonth(posts) {
+            const groupedPosts = {};
+            posts.forEach((post) => {
+                const dateParts = post.fecha.split('-');
+                const monthYear = `${dateParts[1]}-${dateParts[2]}`;
+                if (!groupedPosts[monthYear]) {
+                    groupedPosts[monthYear] = [];
+                }
+                groupedPosts[monthYear].push(post);
+            });
+            return groupedPosts;
+        }
+
+        // Función para crear el índice de posts en la barra lateral
+        function createPostIndex(posts) {
+            const index = document.getElementById('post-index');
+            const groupedPosts = groupByMonth(posts);
+            Object.entries(groupedPosts).forEach(([monthYear, monthPosts]) => {
+                const folder = document.createElement('div');
+                folder.classList.add('folder');
+                // Obtener el nombre del mes a partir del número de mes
+                const dateParts = monthYear.split('-');
+                const monthName = new Date(dateParts[1], dateParts[0] - 1).toLocaleString('es', { month: 'long' });
+                folder.textContent = `${monthName} ${dateParts[0]}`;
+                index.appendChild(folder);
+                const nestedUl = document.createElement('ul');
+                monthPosts.forEach((post, index) => {
+                    const nestedLi = document.createElement('li');
+                    const nestedA = document.createElement('a');
+                    nestedA.href = `post.html?postIndex=${index}`;
+                    nestedA.textContent = post.title;
+                    nestedLi.appendChild(nestedA);
+                    nestedUl.appendChild(nestedLi);
+                });
+                folder.appendChild(nestedUl);
+                // Agregar un controlador de eventos click para hacer que los elementos de la barra lateral sean interactivos
+                folder.addEventListener('click', () => {
+                    folder.classList.toggle('opened');
+                });
+            });
+        }
         // Función para mostrar los últimos 9 posts y enlazar a las páginas dinámicas
         function displayLatestPosts() {
             const xhr = new XMLHttpRequest();
@@ -95,20 +140,12 @@
                             window.location.href = `post.html?postIndex=${posts.length - numberOfPostsToShow + i}`;
                         });
                     });
-                    const postList = document.getElementById('post-list');
-                    posts.forEach((post, i) => {
-                        const listItem = document.createElement('li');
-                        const link = document.createElement('a');
-                        link.href = `post.html?postIndex=${i}`;
-                        link.textContent = post.title;
-                        listItem.appendChild(link);
-                        postList.appendChild(listItem);
-                    });
                 }
             };
             xhr.open('GET', 'posts.json', true);
             xhr.send();
         }
+
 
         displayLatestPosts();
     </script>
