@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Título del post 1",
+        "image": "blog/img/test_1.jpg",
+        "description": "Descripción corta del post 1",
+        "content": "Contenido completo del post 1"
+    },
+    {
+        "title": "Título del post 2",
+        "image": "blog/img/test_2.jpg",
+        "description": "Descripción corta del post 2",
+        "content": "Contenido completo del post 2"
+    },
+    {
+        "title": "Título del post 3",
+        "image": "blog/img/test_3.jpg",
+        "description": "Descripción corta del post 3",
+        "content": "Contenido completo del post 3"
+    },
+    {
+        "title": "Título del post 4",
+        "image": "blog/img/test_4.jpg",
+        "description": "Descripción corta del post 4",
+        "content": "Contenido completo del post 4"
+    }
+]
