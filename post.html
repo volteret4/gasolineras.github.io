@@ -74,56 +74,54 @@
     </aside>
     <div id="post-content"></div>
 
-    <script>
-        // Función para agrupar los posts por mes y año
-        function createPostIndex(posts) {
-            const index = document.getElementById('post-index');
-            const groupedPosts = groupByMonth(posts);
-            Object.entries(groupedPosts).forEach(([monthYear, monthPosts]) => {
-                const folder = document.createElement('div');
-                folder.classList.add('folder');
-                // Obtener el nombre del mes a partir del número de mes
-                const dateParts = monthYear.split('-');
-                const monthName = new Date(dateParts[1], dateParts[0] - 1).toLocaleString('es', { month: 'long' });
-                folder.textContent = `${monthName} ${dateParts[0]}`;
-                index.appendChild(folder);
-                const nestedUl = document.createElement('ul');
-                monthPosts.forEach((postKey, index) => {
-                    const post = posts.blog[postKey];
-                    const nestedLi = document.createElement('li');
-                    const nestedA = document.createElement('a');
-                    nestedA.href = `post.html?postTitle=${postKey}`;
-                    nestedA.textContent = postKey;
-                    nestedLi.appendChild(nestedA);
-                    nestedUl.appendChild(nestedLi);
-                });
-                folder.appendChild(nestedUl);
-                // Agregar un controlador de eventos click para hacer que los elementos de la barra lateral sean interactivos
-                folder.addEventListener('click', () => {
-                    folder.classList.toggle('opened');
-                });
-            });
-        }
+<script>
+    // Función para agrupar los posts por mes y año
+	function createPostIndex(posts) {
+		const index = document.getElementById('post-index');
+		const groupedPosts = groupByMonth(posts);
+		Object.entries(groupedPosts).forEach(([monthYear, monthPosts]) => {
+			const folder = document.createElement('div');
+			folder.classList.add('folder');
+			// Obtener el nombre del mes completo y las dos últimas cifras del año a partir de la cadena "mes-año"
+			const dateParts = monthYear.split('-');
+			const monthName = new Date(dateParts[1], dateParts[0] - 1).toLocaleString('es', { month: 'long' });
+			const year = dateParts[1].slice(-2);
+			folder.textContent = `${monthName} ${year}`;
+			index.appendChild(folder);
+			const nestedUl = document.createElement('ul');
+			monthPosts.forEach((postKey, index) => {
+				const post = posts.blog[postKey];
+				const nestedLi = document.createElement('li');
+				const nestedA = document.createElement('a');
+				nestedA.href = `post.html?postTitle=${postKey}`;
+				nestedA.textContent = postKey;
+				nestedLi.appendChild(nestedA);
+				nestedUl.appendChild(nestedLi);
+			});
+			folder.appendChild(nestedUl);
+			// Agregar un controlador de eventos click para hacer que los elementos de la barra lateral sean interactivos
+			folder.addEventListener('click', () => {
+				folder.classList.toggle('opened');
+			});
+		});
+	}
+    function groupByMonth(posts) {
+        const blogPosts = posts.blog;
+        const groupedPosts = {};
 
-        function groupByMonth(posts) {
-            const blogPosts = posts.blog;
-            const groupedPosts = {};
+        for (const postKey in blogPosts) {
+            const post = blogPosts[postKey];
+            const dateParts = post.fecha_publicacion.split('-');
+            const monthYear = `${dateParts[1]}-${dateParts[0]}`;
 
-            for (const postKey in blogPosts) {
-                const post = blogPosts[postKey];
-                const dateParts = post.fecha_publicacion.split('-');
-                const monthYear = `${dateParts[1]}-${dateParts[0]}`;
-
-                if (!groupedPosts[monthYear]) {
-                    groupedPosts[monthYear] = [];
-                }
-
-                groupedPosts[monthYear].push(postKey);
+            if (!groupedPosts[monthYear]) {
+                groupedPosts[monthYear] = [];
             }
 
-            return groupedPosts;
+            groupedPosts[monthYear].push(postKey);
         }
 
+<<<<<<< HEAD
         // Función para cargar el contenido del post desde el archivo JSON
         function loadPostContent(postName) {
             const xhr = new XMLHttpRequest();
@@ -156,14 +154,51 @@
     xhr.open('GET', 'posts.json');
     xhr.send();
 }
+=======
+        return groupedPosts;
+    }
 
-        // Obtener el índice del post de la URL
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const postTitle = urlParams.get('postTitle');
+    // Función para cargar el contenido del post desde el archivo JSON
+    function loadPostContent(postName) {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const posts = JSON.parse(xhr.responseText);
+                createPostIndex(posts);
+                const post = posts.blog[postName];
+                const title = postName;
+                const image = post.img;
+                const content = post.descripcion;
+                const date = new Date(post["fecha_publicacion"]).toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric'});
+                const postContent = document.getElementById('post-content');
+                const postTitle = document.createElement('h2');
+                postTitle.textContent = title;
+                postContent.appendChild(postTitle);
+                const postImage = document.createElement('img');
+                postImage.src = image;
+                postImage.style.width = '600px';
+				postImage.style.height = '600px';
+                postContent.appendChild(postImage);
+                const postDate = document.createElement('p');
+                postDate.textContent = date;
+                postContent.appendChild(postDate);
+                const postContentPara = document.createElement('p');
+                postContentPara.innerHTML = content;
+                postContent.appendChild(postContentPara);
+            }
+        };
+        xhr.open('GET', 'posts.json');
+        xhr.send();
+    }
+>>>>>>> 98f6b24e07433f3c08986256527360ac9a779109
 
-        // Cargar el contenido del post correspondiente
-        loadPostContent(postTitle);
-    </script>
+    // Obtener el índice del post de la URL
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const postTitle = urlParams.get('postTitle');
+
+    // Cargar el contenido del post correspondiente
+    loadPostContent(postTitle);
+</script>
 </body>
 </html>
