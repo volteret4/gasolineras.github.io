@@ -1,40 +1,49 @@
 {
-    "blog": {
-        "Nirvana - In utero": {
-            "artista": "nirvana",
-            "disco": "in utero",
-            "fecha lanzamiento": "1-1-1980",
-            "img": "./blog/img/test_1.jpg",
-            "descripcion": "blablabla",
-            "fecha_publicacion": "2023-02-12",
-            "links": "https..."
-        },
-        "Nirvana - Bleached": {
-            "artista": "nirvana",
-            "disco": "in utero",
-            "fecha lanzamiento": "1-1-1980",
-            "img": "./blog/img/test_2.jpg",
-            "descripcion": "blablabla",
-            "fecha_publicacion": "2023-03-15",
-            "links": "https..."
-        },
-        "Nirvana - test3": {
-            "artista": "nirvana",
-            "disco": "in utero",
-            "fecha lanzamiento": "1-1-1980",
-            "img": "./blog/img/test_3.jpg",
-            "descripcion": "blablabla",
-            "fecha_publicacion": "2023-04-15",
-            "links": "https..."
-        },
-        "Rosendo - xxx": {
-            "artista": "Rosendo",
-            "disco": "xxx",
-            "fecha lanzamiento": "1-1-1980",
-            "img": "...",
-            "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "fecha_publicacion": "2023-05-15",
-            "links": "..."
-        }
+  "blog": {
+    "Nirvana - In utero": {
+      "artista": "nirvana",
+      "disco": "in utero",
+      "fecha lanzamiento": "1-1-1980",
+      "img": "./blog/img/test_1.jpg",
+      "descripcion": "blablabla",
+      "fecha_publicacion": "2023-02-12",
+      "links": "https..."
+    },
+    "Nirvana - Bleached": {
+      "artista": "nirvana",
+      "disco": "in utero",
+      "fecha lanzamiento": "1-1-1980",
+      "img": "./blog/img/test_2.jpg",
+      "descripcion": "blablabla",
+      "fecha_publicacion": "2023-03-15",
+      "links": "https..."
+    },
+    "Nirvana - test3": {
+      "artista": "nirvana",
+      "disco": "in utero",
+      "fecha lanzamiento": "1-1-1980",
+      "img": "./blog/img/test_3.jpg",
+      "descripcion": "blablabla",
+      "fecha_publicacion": "2023-04-15",
+      "links": "https..."
+    },
+    "Rosendo - xxx": {
+      "artista": "Rosendo",
+      "disco": "xxx",
+      "fecha lanzamiento": "1-1-1980",
+      "img": "...",
+      "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      "fecha_publicacion": "2023-05-15",
+      "links": "..."
+    },
+    "miles davis - tutu": {
+      "artista": "miles davis",
+      "disco": "tutu",
+      "fecha lanzamiento": "1986",
+      "img": "./blog/img/miles davis-tutu.png",
+      "descripcion": "Miles Davis es sin duda uno de los músicos más influyentes del siglo XX y su álbum Tutu es un claro ejemplo de su genialidad. Este disco supuso una evolución en la carrera de Davis, acercándolo a un sonido más electrónico y experimental. Pero detrás de este gran álbum hay muchas historias que merecen ser contadas.Durante la grabación de Tutu, Miles Davis trabajó con el guitarrista y productor Marcus Miller, quien se encargó de los arreglos y producción del disco. Miller confesó que en un momento de la grabación, Davis dejó caer su trompeta al suelo mientras tocaba la melodía de Tutu. Sin embargo, decidió dejar ese sonido accidental en la grabación, logrando un efecto sonoro único en el tema.Durante la grabación, Davis experimentó con diferentes efectos electrónicos y dispositivos para su trompeta, incluyendo un sintetizador de guitarra. Según dice la leyenda, en uno de los días de grabación, Davis empezó a tocar con el sintetizador y se olvidó de que seguía transmitiendo en vivo por televisión, lo que provocó un gran número de llamadas telefónicas a la estación de televisión.Una vez que el álbum se terminó de grabar, Davis decidió llevar a cabo una gira para promocionarlo. En uno de los conciertos, Davis detuvo la presentación para pedir chocolate caliente. A pesar de que muchos miembros de la audiencia se sintieron desconcertados por esta petición, Davis logró conseguir su bebida y continuar con el concierto como si nada hubiera pasado.Poco después de que se lanzara Tutu, Davis recibió una llamada del famoso (y excéntrico) pintor Salvador Dalí, quien le ofreció pintar un cuadro suyo. Davis aceptó y Dalí creó un arte conceptual para la portada del álbum. Aunque finalmente esta portada no se utilizó, la historia nos muestra la enorme capacidad de Davis para atraer a personas de talento diverso.Finalmente, uno de los momentos más emocionantes durante la gira de Tutu se produjo cuando Davis tocó en Nueva York en el famoso Blue Note. Durante esa presentación, el álbum alcanzó el número uno en las listas de ventas de jazz, lo que generó un enorme aplauso de la audiencia.En resumen, Tutu es un álbum imprescindible para aquellos que aman la música de Miles Davis y desean conocer su legado. Detrás de cada canción hay historias interesantes y divertidas, que revelan el enorme talento y personalidad de este gran artista.",
+      "fecha_publicacion": "2023-05-16",
+      "links": "https..."
     }
+  }
 }
