@@ -1,50 +1,5 @@
 {
   "blog": {
-    "Nirvana - In utero": {
-      "artista": "nirvana",
-      "disco": "in utero",
-      "fecha lanzamiento": "1-1-1980",
-      "img": "./blog/img/test_1.jpg",
-      "descripcion": "blablabla",
-      "fecha_publicacion": "2023-02-12",
-      "links": "https..."
-    },
-    "Nirvana - Bleached": {
-      "artista": "nirvana",
-      "disco": "in utero",
-      "fecha lanzamiento": "1-1-1980",
-      "img": "./blog/img/test_2.jpg",
-      "descripcion": "blablabla",
-      "fecha_publicacion": "2023-03-15",
-      "links": "https..."
-    },
-    "Nirvana - test3": {
-      "artista": "nirvana",
-      "disco": "in utero",
-      "fecha lanzamiento": "1-1-1980",
-      "img": "./blog/img/test_3.jpg",
-      "descripcion": "blablabla",
-      "fecha_publicacion": "2023-04-15",
-      "links": "https..."
-    },
-    "Rosendo - xxx": {
-      "artista": "Rosendo",
-      "disco": "xxx",
-      "fecha lanzamiento": "1-1-1980",
-      "img": "...",
-      "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-      "fecha_publicacion": "2023-05-15",
-      "links": "..."
-    },
-    "miles davis - tutu": {
-      "artista": "miles davis",
-      "disco": "tutu",
-      "fecha lanzamiento": "1995",
-      "img": "./blog/img/miles davis-tutu..jpeg",
-      "descripcion": "Si eres un apasionado de la música y la historia, seguro que no puedes perder la oportunidad de conocer los detalles del álbum  \"Pedra \" de Extremoduro. Aquí te dejo siete datos interesantes sobre este trabajo de la mítica banda de rock español:1.  \"Pedra \" es el séptimo álbum de estudio de Extremoduro y fue lanzado en el año 1995. 2. El título del álbum hace referencia a la ciudad de Pedrajas, en la provincia de Valladolid, donde el grupo grabó las canciones. 3. Este disco se considera uno de los más importantes de la carrera de la banda, ya que marcó un antes y un después en su estilo musical. Se alejaron del punk rock y se acercaron más al hard rock y al heavy metal.4. Entre las canciones más destacadas de  \"Pedra \" se encuentran  \"Sucede \",  \"Si te vas... \",  \"Volando solo \" y  \"So payaso \". Todas ellas forman parte de los éxitos más representativos de Extremoduro.5. En la producción de este álbum estuvo involucrado la leyenda del rock, Colin Richardson, quien ya había trabajado con grupos como Metallica, Iron Maiden o Slayer.6. La grabación de  \"Pedra \" fue un proceso complicado, ya que los miembros de Extremoduro estuvieron sometidos a una gran presión y estrés, lo que provocó tensiones internas en el grupo.7. A pesar de las dificultades, el resultado final fue extraordinario. Con  \"Pedra \", Extremoduro conquistó al público rockero español y se consagró como una de las bandas más importantes del panorama musical ibérico.",
-      "fecha_publicacion": "2023-05-16",
-      "links": "https..."
-    },
     "extremoduro - pedra": {
       "artista": "extremoduro",
       "disco": "pedra",
