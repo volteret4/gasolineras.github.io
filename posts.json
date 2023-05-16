@@ -1,56 +1,20 @@
 {
   "blog": {
-    "Nirvana - In utero": {
-      "artista": "nirvana",
-      "disco": "in utero",
-      "fecha lanzamiento": "1-1-1980",
-      "img": "./blog/img/test_1.jpg",
-      "descripcion": "blablabla",
-      "fecha_publicacion": "2023-02-12",
-      "links": "https..."
-    },
-    "Nirvana - Bleached": {
-      "artista": "nirvana",
-      "disco": "in utero",
-      "fecha lanzamiento": "1-1-1980",
-      "img": "./blog/img/test_2.jpg",
-      "descripcion": "blablabla",
-      "fecha_publicacion": "2023-03-15",
-      "links": "https..."
-    },
-    "Nirvana - test3": {
-      "artista": "nirvana",
-      "disco": "in utero",
-      "fecha lanzamiento": "1-1-1980",
-      "img": "./blog/img/test_3.jpg",
-      "descripcion": "blablabla",
-      "fecha_publicacion": "2023-04-15",
-      "links": "https..."
-    },
-    "Rosendo - xxx": {
-      "artista": "Rosendo",
-      "disco": "xxx",
-      "fecha lanzamiento": "1-1-1980",
-      "img": "...",
-      "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-      "fecha_publicacion": "2023-05-15",
-      "links": "..."
-    },
-    "miles davis - tutu": {
-      "artista": "miles davis",
-      "disco": "tutu",
-      "fecha lanzamiento": "1995",
-      "img": "./blog/img/miles davis-tutu..jpeg",
-      "descripcion": "Si eres un apasionado de la música y la historia, seguro que no puedes perder la oportunidad de conocer los detalles del álbum  \"Pedra \" de Extremoduro. Aquí te dejo siete datos interesantes sobre este trabajo de la mítica banda de rock español:1.  \"Pedra \" es el séptimo álbum de estudio de Extremoduro y fue lanzado en el año 1995. 2. El título del álbum hace referencia a la ciudad de Pedrajas, en la provincia de Valladolid, donde el grupo grabó las canciones. 3. Este disco se considera uno de los más importantes de la carrera de la banda, ya que marcó un antes y un después en su estilo musical. Se alejaron del punk rock y se acercaron más al hard rock y al heavy metal.4. Entre las canciones más destacadas de  \"Pedra \" se encuentran  \"Sucede \",  \"Si te vas... \",  \"Volando solo \" y  \"So payaso \". Todas ellas forman parte de los éxitos más representativos de Extremoduro.5. En la producción de este álbum estuvo involucrado la leyenda del rock, Colin Richardson, quien ya había trabajado con grupos como Metallica, Iron Maiden o Slayer.6. La grabación de  \"Pedra \" fue un proceso complicado, ya que los miembros de Extremoduro estuvieron sometidos a una gran presión y estrés, lo que provocó tensiones internas en el grupo.7. A pesar de las dificultades, el resultado final fue extraordinario. Con  \"Pedra \", Extremoduro conquistó al público rockero español y se consagró como una de las bandas más importantes del panorama musical ibérico.",
-      "fecha_publicacion": "2023-05-16",
-      "links": "https..."
-    },
     "extremoduro - pedra": {
       "artista": "extremoduro",
       "disco": "pedra",
       "fecha lanzamiento": "1995",
       "img": "./blog/img/extremoduro-pedra..jpeg",
       "descripcion": "Extremoduro es un grupo legendario del rock en español y su álbum  \"Pedrá \" es uno de los más icónicos de su carrera. En este post, te contaré algunas anécdotas interesantes sobre la grabación y el tour de este álbum, que seguramente te sorprenderán.1. El título del álbum,  \"Pedrá \", fue inspirado en una conversación que el cantante Roberto Iniesta tuvo con su abuela. La abuela le dijo que la vida estaba llena de  \"pedrás \" (obstáculos), pero que debía seguir adelante y no dejarse vencer. Esto inspiró al grupo a crear un álbum lleno de fuerza y energía.2. Durante la grabación del álbum, el grupo se encontró con varios problemas técnicos. En una ocasión, el estudio se inundó y se perdieron algunas grabaciones. A pesar de esto, el grupo perseveró y logró terminar el álbum en tiempo y forma.3. Durante la gira de  \"Pedrá \", el grupo se presentó en varios festivales importantes de España, como el Viñarock y el Festival Internacional de Benicàssim. En todos ellos, el público respondió con entusiasmo y el grupo se consolidó como una de las bandas más importantes del rock nacional.4. En una ocasión, el grupo tuvo un problema con la policía durante un concierto en Madrid. La canción que estaban tocando en ese momento,  \"So payaso \", criticaba la actuación de la policía en el país y esto causó un enfrentamiento con los agentes presentes en el concierto. A pesar de todo, el grupo logró terminar el concierto con éxito.5. La canción más conocida del álbum,  \"Buscando una luna \", fue inspirada en un viaje que el guitarrista Iñaki Antón hizo a México. Allí se enamoró de una mujer y decidió escribirle una canción. El resultado fue esta gran canción de amor que se convirtió en un himno del grupo. \"Pedrá \" es un álbum memorable de Extremoduro y estas anécdotas demuestran el esfuerzo y la dedicación que el grupo puso en su creación y en su tour. Espero que esta pequeña lista te ayude a conocer un poco más sobre la historia detrás de una de las obras maestras del rock en español.",
+      "fecha_publicacion": "2023-05-16",
+      "links": "https..."
+    },
+    "sfdk - el liricista en el tejado": {
+      "artista": "sfdk",
+      "disco": "el liricista en el tejado",
+      "fecha lanzamiento": "%fecha_lanz",
+      "img": "./blog/img/sfdk-el liricista en el tejado.",
+      "descripcion": "SFDK es una de las bandas más influyentes del rap español, y su álbum  \"El Líricista en el Tejado \" es un ejemplo perfecto de su talento inigualable. Además de sus letras afiladas y su producción impecable, este álbum está lleno de anécdotas interesantes que merecen ser mencionadas.Uno de los momentos más destacados de la grabación de este álbum fue cuando SFDK recibió la visita del legendario grupo de hip hop Wu-Tang Clan, quienes quedaron tan impresionados por la calidad de su música que quisieron participar en una de sus canciones. Esta colaboración dio lugar al aclamado tema  \"Wu Tang Clan y SFDK \".Durante la gira de  \"El Líricista en el Tejado \", SFDK tuvo la oportunidad de tocar en algunos de los lugares más emblemáticos de España. Pero uno de los shows más memorables fue en el Festival Sonar de Barcelona, donde la banda compartió escenario con artistas como Aphex Twin y Bjork. La energía de la multitud fue contagiosa y el grupo dejó una marca indeleble en la mente de los asistentes.Otra emocionante anécdota relacionada con este álbum se dio cuando a la banda se le concedió la oportunidad de abrir para Eminem en su gira europea. Durante el show, SFDK logró hacerse un hueco en el corazón del público y recibió una ovación de pie por parte de los fans en cada uno de los shows.Otro momento divertido que sucedió durante la grabación de este álbum fue cuando la banda decidió grabar una parte de una canción en un antiguo molino de harina construido en el siglo XIX. A pesar de las dificultades técnicas y del hecho de que el lugar estaba en ruinas, SFDK consiguió grabar una pista que resultó ser una de las más emocionantes del álbum.Finalmente, una de las anécdotas más inspiradoras de este álbum es el hecho de que SFDK logró superar las adversidades y las dificultades financieras para conseguir hacer su música y presentarla ante el mundo. El álbum  \"El Líricista en el Tejado \" es una muestra del talento y la dedicación de este grupo, y todavía hoy, sigue siendo una referencia para las nuevas generaciones de artistas que buscan su lugar en la industria de la música.",
       "fecha_publicacion": "2023-05-16",
       "links": "https..."
     }
