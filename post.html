@@ -121,40 +121,6 @@
             groupedPosts[monthYear].push(postKey);
         }
 
-<<<<<<< HEAD
-        // Función para cargar el contenido del post desde el archivo JSON
-        function loadPostContent(postName) {
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    const posts = JSON.parse(xhr.responseText);
-                    createPostIndex(posts);
-                    const post = posts.blog[postTitle];
-                    const title = postName;
-                    const image = post.img;
-                    const content = post.descripcion;
-                    const date = new Date(post["fecha_publicacion"]).toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric'});
-                    const postContent = document.getElementById('post-content');
-                    const postTitle = document.createElement('h2');
-                    postTitle.textContent = title;
-                    postContent.appendChild(postTitle);
-                    const postImage = document.createElement('img');
-                    postImage.src = image;
-                    postImage.style.width = '600px';
-                    postImage.style.height = '600px';
-                    postContent.appendChild(postImage);
-                    const postDate = document.createElement('p');
-                    postDate.textContent = date;
-                    postContent.appendChild(postDate);
-                    const postContentPara = document.createElement('p');
-                    postContentPara.innerHTML = content;
-                    postContent.appendChild(postContentPara);
-                }
-            };
-    xhr.open('GET', 'posts.json');
-    xhr.send();
-}
-=======
         return groupedPosts;
     }
 
@@ -190,7 +156,6 @@
         xhr.open('GET', 'posts.json');
         xhr.send();
     }
->>>>>>> 98f6b24e07433f3c08986256527360ac9a779109
 
     // Obtener el índice del post de la URL
     const queryString = window.location.search;
