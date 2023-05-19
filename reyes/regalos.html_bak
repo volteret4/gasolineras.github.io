@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web dinámica basada en JSON</title>
+    <style>
+        body {
+        background-color: #181a1c;
+        color: white;
+        font-family: Monospace, sans-serif;
+        }
+    </style>
+    </head>
+    <body>
+    <form>
+        <label for="name">Selecciona tu nombre:</label>
+        <select id="name" onchange="loadData()">
+        <option value="">Selecciona un nombre</option>
+        <option value="persona1">Persona 1</option>
+        <option value="persona2">Persona 2</option>
+        <!-- agregar opciones para las 15 personas -->
+        </select>
+    </form>
+
+    <div id="content"></div>
+
+    <script>
+        const jsonFile = "reyes.json";
+        let jsonData = {};
+
+        function loadData() {
+        const name = document.getElementById("name").value;
+
+        if (name === "") {
+            return;
+        }
+
+        fetch(jsonFile)
+            .then(response => response.json())
+            .then(data => {
+            jsonData = data;
+            displayData(name);
+            })
+            .catch(error => console.error(error));
+        }
+
+        function displayData(name) {
+        const contentDiv = document.getElementById("content");
+        contentDiv.innerHTML = "";
+
+        Object.keys(jsonData).forEach(persona => {
+            if (persona !== name) {
+            Object.keys(jsonData[persona]).forEach(regalo => {
+                const regaloDiv = document.createElement("div");
+                regaloDiv.innerHTML = `
+                <h3>${persona}</h3>
+                <ul>
+                    <li>${regalo}: ${jsonData[persona][regalo]}</li>
+                </ul>
+                <button onclick="comprarRegalo(this)">Comprar</button>
+                <button onclick="verificarCompra(this)">Verificar Compra</button>
+                `;
+                contentDiv.appendChild(regaloDiv);
+            });
+            }
+        });
+        }
+
+        document.getElementById("name").addEventListener("change", event => {
+        const name = event.target.value;
+        displayData(name);
+        });
+
+        function comprarRegalo(button) {
+        const regalo = button.parentNode;
+        const nombre = regalo.querySelector("h3").textContent;
+        const descripcion = regalo.querySelector("li").textContent;
+        console.log(`Compraste el regalo de ${nombre}: ${descripcion}`);
+        }
+
+        function verificarCompra(button) {
+        const regalo = button.parentNode;
+        const nombre = regalo.querySelector("h3").textContent;
+        const descripcion = regalo.querySelector("li").textContent;
+        console.log(`Verificaste la compra del regalo de ${nombre}: ${descripcion}`);
+        }
+    </script>
+</body>
+</html>

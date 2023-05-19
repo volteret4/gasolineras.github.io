@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web dinámica basada en JSON</title>
+    <style>
+        body {
+        background-color: #181a1c;
+        color: white;
+        font-family: Monospace, sans-serif;
+        }
+    </style>
+    </head>
+    <body>
+    <div id="github-login"></div>
+
+    <form>
+        <label for="name">Selecciona tu nombre:</label>
+        <select id="name">
+        <option value="">Selecciona un nombre</option>
+        <option value="persona1">Persona 1</option>
+        <option value="persona2">Persona 2</option>
+        <!-- agregar opciones para las 15 personas -->
+        </select>
+    </form>
+
+    <div id="content"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/github-login/dist/github-login.min.js"></script>
+    <script type="module" src="index.js"></script>
+</body>
+</html>

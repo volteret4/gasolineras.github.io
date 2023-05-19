@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web dinámica basada en JSON</title>
+    <style>
+        body {
+        background-color: #181a1c;
+        color: white;
+        font-family: Monospace, sans-serif;
+        }
+    </style>
+    </head>
+    <body>
+    <form>
+        <label for="name">Selecciona tu nombre:</label>
+        <select id="name" onchange="loadData()">
+        <option value="">Selecciona un nombre</option>
+        <option value="persona1">Persona 1</option>
+        <option value="persona2">Persona 2</option>
+        <!-- agregar opciones para las 15 personas -->
+        </select>
+    </form>
+
+    <div id="content"></div>
+
+    <script>
+        const jsonFile = "reyes.json";
+        let jsonData = {};
+
+        function loadData() {
+        const name = document.getElementById("name").value;
+
+        if (name === "") {
+            return;
+        }
+
+        fetch(jsonFile)
+            .then(response => response.json())
+            .then(data => {
+            jsonData = data;
+            displayData(name);
+            })
+            .catch(error => console.error(error));
+        }
+
+        function displayData(name) {
+        const contentDiv = document.getElementById("content");
+        contentDiv.innerHTML = "";
+
+        Object.keys(jsonData).forEach(persona => {
+            if (persona !== name) {
+            contentDiv.innerHTML += `<h2>${persona}</h2>`;
+            contentDiv.innerHTML += "<ul>";
+
+            Object.keys(jsonData[persona]).forEach(regalo => {
+                contentDiv.innerHTML += `<li>${regalo}: ${jsonData[persona][regalo]}</li>`;
+            });
+
+            contentDiv.innerHTML += "</ul>";
+            }
+        });
+        }
+
+        document.getElementById("name").addEventListener("change", event => {
+        const name = event.target.value;
+        displayData(name);
+        });
+    </script>
+</body>
+</html>
